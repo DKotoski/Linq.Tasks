@@ -14,6 +14,22 @@ namespace Linq.Tasks
             List<Product> products = InitProducts();
 
             var namesOfProducts = products.Select(p => p.Name);
+
+            Random rnd = new Random();
+            List<int> integers = new List<int>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                integers.Add(rnd.Next(300));
+            }
+
+
+            var distinct = integers.Distinct();
+            products.Distinct(new ProductComparer());
+
+            var skipWhile = products.Where(x => x.UnitPrice <= 3);
+
+            var prices = products.SkipWhile(x => x.UnitPrice<6);
             Console.ReadLine();
         }
         static List<Product> InitProducts()
